@@ -25,8 +25,15 @@ const sendEmail = async (options) => {
       subject: options.subject,
       text: options.message,
     };
-
-    //await client.sendAsync(messageToSend);
+    // await new Promise((resolve, reject) => {
+    //   client.send(messageToSend, (err, message) => {
+    //     if (err) {
+    //       reject(err);
+    //     } else {
+    //       resolve(message);
+    //     }
+    //   });
+    // });
     //console.log("Email sent successfully using emailjs.");
   } catch (error) {
     console.error("Error sending email with emailjs:", error);
