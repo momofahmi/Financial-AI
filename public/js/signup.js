@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const credentialsData = await credentialsResponse.json();
             if (credentialsData.success) {
-                alert('Signup successful');
                 const otpResponse = await fetch('/api/auth/send-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

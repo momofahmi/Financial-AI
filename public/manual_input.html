@@ -119,8 +119,16 @@
         </div>
     </div>
 
+
+
     <script>
-       
+         document.getElementById('manualInputForm').onsubmit = function(event) {
+            document.getElementById('successModal').classList.remove('hidden');
+        };
+
+        document.getElementById('closeModal').onclick = function() {
+            window.location.href = "/getCompany";
+        };
     </script>
 </body>
 </html>

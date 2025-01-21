@@ -131,6 +131,11 @@
         <p><strong>Country of Exchange:</strong> ${company.generalInfo.countryOfExchange || 'N/A'}</p>
         <p><strong>Country of Headquarters:</strong> ${company.generalInfo.countryOfHeadquarters || 'N/A'}</p>
         <p><strong>TRBC Industry Group:</strong> ${company.generalInfo.trbcIndustryGroup || 'N/A'}</p>
+        <p><strong>CF Template:</strong> ${company.generalInfo.cfTemplate || 'N/A'}</p>
+        <p><strong>Consolidation Basis:</strong> ${company.generalInfo.consolidationBasis || 'N/A'}</p>
+        <p><strong>Scaling:</strong> ${company.generalInfo.scaling || 'N/A'}</p>
+        <p><strong>Period:</strong> ${company.generalInfo.period || 'N/A'}</p>
+        <p><strong>Export Date:</strong> ${company.generalInfo.exportDate || 'N/A'}</p>
       `;
       companyInfoDiv.insertAdjacentHTML('beforeend', infoHtml);
 

@@ -17,62 +17,70 @@ const addOrUpdateCompany = async (req, res) => {
         }
 
         // Find the company by name
-
         let company = await Company.findOne({ 'generalInfo.companyName': generalInfo.companyName });
 
         if (company) {
-            // Update `generalInfo`
-            company.generalInfo = generalInfo;
+
+            // Update data in `generalInfo` only for the one provided not all and if not provided use the existing data
+            company.generalInfo = {
+                companyName: generalInfo.companyName || company.generalInfo.companyName,
+                countryOfExchange: generalInfo.countryOfExchange || company.generalInfo.countryOfExchange,
+                countryOfHeadquarters: generalInfo.countryOfHeadquarters || company.generalInfo.countryOfHeadquarters,
+                trbcIndustryGroup: generalInfo.trbcIndustryGroup || company.generalInfo.trbcIndustryGroup,
+                cfTemplate: generalInfo.cfTemplate || company.generalInfo.cfTemplate,
+                consolidationBasis: generalInfo.consolidationBasis || company.generalInfo.consolidationBasis,
+                scaling: generalInfo.scaling || company.generalInfo.scaling,
+                period: generalInfo.period || company.generalInfo.period,
+                exportDate: generalInfo.exportDate || company.generalInfo.exportDate,
+            };
+            
+            
 
             // Update or add financial data
-            financialData.forEach((newData) => {
-                const financialDataEntry = {
-                    date: new Date(newData.date),
-                    standardizedCurrency: newData.standardizedCurrency,
-                    revenueFromGoodsServices: parseFloat(newData.revenueFromGoodsServices) || 0, // Convert to float
-                    revenueFromBusinessActivitiesTotal: parseFloat(newData.revenueFromBusinessActivitiesTotal) || 0,
-                    costOfOperatingRevenue: parseFloat(newData.costOfOperatingRevenue) || 0,
-                    grossProfitIndustrials: parseFloat(newData.grossProfitIndustrials) || 0,
-                    operatingExpensesTotal: parseFloat(newData.operatingExpensesTotal) || 0,
-                    operatingProfitBeforeNonRecurring: parseFloat(newData.operatingProfitBeforeNonRecurring) || 0,
-                    incomeBeforeTaxes: parseFloat(newData.incomeBeforeTaxes) || 0,
-                    netIncomeAfterTax: parseFloat(newData.netIncomeAfterTax) || 0,
-                    ebitda: parseFloat(newData.ebitda) || 0,
-                };
+            if (financialData && financialData.length > 0) {
+                financialData.forEach((newData) => {
+                    const financialDataEntry = {
+                        date: new Date(newData.date),
+                        standardizedCurrency: newData.standardizedCurrency,
+                        revenueFromGoodsServices: parseFloat(newData.revenueFromGoodsServices) || 0,
+                        revenueFromBusinessActivitiesTotal: parseFloat(newData.revenueFromBusinessActivitiesTotal) || 0,
+                        costOfOperatingRevenue: parseFloat(newData.costOfOperatingRevenue) || 0,
+                        grossProfitIndustrials: parseFloat(newData.grossProfitIndustrials) || 0,
+                        operatingExpensesTotal: parseFloat(newData.operatingExpensesTotal) || 0,
+                        operatingProfitBeforeNonRecurring: parseFloat(newData.operatingProfitBeforeNonRecurring) || 0,
+                        incomeBeforeTaxes: parseFloat(newData.incomeBeforeTaxes) || 0,
+                        netIncomeAfterTax: parseFloat(newData.netIncomeAfterTax) || 0,
+                        ebitda: parseFloat(newData.ebitda) || 0,
+                    };
 
-                // Check if the date already exists in financialData
-                const existingData = company.financialData.find(
-                    (data) => new Date(data.date).toISOString() === new Date(newData.date).toISOString()
-                );
+                    // Check if the date already exists in financialData
+                    const existingData = company.financialData.find(
+                        (data) => new Date(data.date).toISOString() === new Date(newData.date).toISOString()
+                    );
 
-                if (existingData) {
-                    // Update existing financial data
-                    Object.assign(existingData, financialDataEntry);
-                } else {
-                    // Add new financial data
-                    company.financialData.push(financialDataEntry);
-                }
-            });
+                    if (existingData) {
+                        // Update existing financial data
+                        Object.assign(existingData, financialDataEntry);
+                    } else {
+                        // Add new financial data
+                        company.financialData.push(financialDataEntry);
+                    }
+                });
+            }
 
             // Save changes to MongoDB
             await company.save();
-            const token = req.cookies.token;
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            const idy = decoded.id;
-            
-            const user = await User.findOne({ _id: idy });
-            user.companies.push(company._id);
-            await user.save();
-            return res.status(200).json({ message: 'Company information updated successfully', company });
+            return;
+            //return res.status(200).json({ message: 'Company information updated successfully', company });
         }
 
         // If the company does not exist, create a new one
         company = new Company({
             generalInfo,
-            financialData: financialData.map((newData) => ({
+            financialData: financialData?.map((newData) => ({
                 date: new Date(newData.date),
                 standardizedCurrency: newData.standardizedCurrency,
-                revenueFromGoodsServices: parseFloat(newData.revenueFromGoodsServices) || 0, // Convert to float
+                revenueFromGoodsServices: parseFloat(newData.revenueFromGoodsServices) || 0,
                 revenueFromBusinessActivitiesTotal: parseFloat(newData.revenueFromBusinessActivitiesTotal) || 0,
                 costOfOperatingRevenue: parseFloat(newData.costOfOperatingRevenue) || 0,
                 grossProfitIndustrials: parseFloat(newData.grossProfitIndustrials) || 0,
@@ -81,25 +89,29 @@ const addOrUpdateCompany = async (req, res) => {
                 incomeBeforeTaxes: parseFloat(newData.incomeBeforeTaxes) || 0,
                 netIncomeAfterTax: parseFloat(newData.netIncomeAfterTax) || 0,
                 ebitda: parseFloat(newData.ebitda) || 0,
-            })),
+            })) || [],
         });
         await company.save();
+
+        // Add the company to the user's list
         const token = req.cookies.token;
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const idy = decoded.id;
-        
-        const user = await User.findOne({ _id: idy });
-        user.companies.push(company._id);
-        await user.save();
-        console.log('user:', user);
-        // add the company to the array of user
 
-        return res.status(201).json({ message: 'Company information added successfully', company });
+        const user = await User.findOne({ _id: idy });
+        if (!user.companies.includes(company._id)) {
+            user.companies.push(company._id);
+            await user.save();
+        }
+
+        return;
+        //return res.status(201).json({ message: 'Company information added successfully', company });
     } catch (error) {
         console.error('Error in addOrUpdateCompany:', error.message);
         return res.status(500).json({ error: 'An error occurred while processing the request', details: error.message });
     }
 };
+
 
 
 
@@ -246,20 +258,20 @@ const getCompanyByName = async (req, res) => {
         const token = req.cookies.token;
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
          const idy = decoded.id;
-        console.log("id", idy);
+         //console.log("id", idy);
         const user = await User.findOne({ _id: idy });
-        console.log("user", user);
+         //console.log("user", user);
         const companyList = await user.companies;
         //console.log('companyList:', companyList);
        // const company = await Company.find({ _id: { $in: companyList } });
        // console.log('company:', company);
        const company = await Company.findOne({ 'generalInfo.companyName': companyName, _id: { $in: companyList } });
         //console.log('company:', company);
-        console.log('companyLşist:', companyList);
+         //console.log('companyLşist:', companyList);
         if (!company) {
             return res.status(404).json({ message: 'Company not found' });
         }
-        console.log("hey yoooo")
+        //console.log("hey yoooo")
         return res.status(200).json({
             message: 'Company information retrieved successfully',
             company,

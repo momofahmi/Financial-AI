@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
             });
+            if (!credentialsResponse.ok) {
+                alert('Invalid email or password');
+                return;
+            }
+
             const credentialsData = await credentialsResponse.json();
             localStorage.setItem('userEmail', email);
            
