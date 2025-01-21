@@ -1,45 +1,30 @@
-const { SMTPClient } = require('emailjs');
+require('dotenv').config();
+const nodemailer = require("nodemailer");
 
-const SMPT_HOST = "smtp.mailersend.net";
-const SMPT_PORT = "587";
-const SMPT_MAIL = "MS_XUBRKF@trial-pq3enl6oqw0l2vwr.mlsender.net";
-const SMPT_APP_PASS = "Xdv3TNpMAxsBeYo2";
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER, // Your Gmail
+        pass: process.env.EMAIL_PASS, // Your App Password
+    },
+});
 
 const sendEmail = async (options) => {
-  console.log("Sending email with emailjs.", options.message);
-  try {
-    const client = new SMTPClient({
-      user: SMPT_MAIL,
-      password: SMPT_APP_PASS,
-      host: SMPT_HOST,
-      port: SMPT_PORT,
-      timeout: 10000,
-      tls: true,
-      debug: true,
-      authentication: ['LOGIN'],
-    });
+    console.log("📤 Sending email with Nodemailer...", options.message);
 
-    const messageToSend = {
-      from: SMPT_MAIL,
-      to: options.to,
-      subject: options.subject,
-      text: options.message,
-    };
-    // await new Promise((resolve, reject) => {
-    //   client.send(messageToSend, (err, message) => {
-    //     if (err) {
-    //       reject(err);
-    //     } else {
-    //       resolve(message);
-    //     }
-    //   });
-    // });
-    //console.log("Email sent successfully using emailjs.");
-  } catch (error) {
-    console.error("Error sending email with emailjs:", error);
-    throw new Error("Failed to send email.");
-  }
+    try {
+        const info = await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: options.to,
+            subject: options.subject,
+            text: options.message,
+        });
+
+        console.log("✅ Email sent successfully:", info);
+    } catch (error) {
+        console.error("❌ Error sending email:", error);
+        throw new Error("Failed to send email.");
+    }
 };
 
 module.exports = sendEmail;
-
