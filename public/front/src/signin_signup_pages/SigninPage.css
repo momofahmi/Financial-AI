@@ -1,0 +1,168 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background: #f0f4ff;
+    padding: 1rem;
+    border-radius: 15px;
+    width: 90%; /* Fit smaller screens */
+    max-width: 360px; /* Limit maximum width */
+    max-height: 600px; /* Ensure it stays compact */
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Prevent overflow issues */
+  }
+  
+  /* Header with Logo and Close Button */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .logo-top-left {
+    width: 35px; /* Smaller logo */
+    height: 35px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #6c8eff;
+  }
+  
+  /* Sign-in Container */
+  .signin-container {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Tab Container */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem; /* Reduced margin */
+  }
+  
+  .tab {
+    padding: 0.4rem 0.8rem; /* Reduced padding */
+    border: none;
+    font-size: 0.9rem; /* Smaller font size */
+    cursor: pointer;
+    background-color: #e0e6ff;
+    border-radius: 8px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .tab:hover {
+    background-color: #d0dbff;
+  }
+  
+  .signin-tab.active {
+    background-color: #6c8eff;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Sign-in Form */
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Reduced gap */
+  }
+  
+  .signin-form label {
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.2rem; /* Reduced margin */
+  }
+  
+  .signin-form input {
+    padding: 0.6rem; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem; /* Smaller font size */
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .signin-form input:focus {
+    outline: none;
+    border-color: #6c8eff;
+    box-shadow: 0 0 5px rgba(108, 142, 255, 0.5);
+  }
+  
+  /* Submit Button */
+  .signin-button {
+    background-color: #6c8eff;
+    color: white;
+    padding: 0.6rem; /* Reduced padding */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem; /* Smaller font size */
+    cursor: pointer;
+    margin-top: 0.8rem; /* Reduced margin */
+  }
+  
+  .signin-button:hover {
+    background-color: #557de8;
+  }
+  
+  /* Social Buttons */
+  .social-buttons {
+    margin-top: 1rem; /* Reduced margin */
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem; /* Reduced gap */
+  }
+  
+  .social-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem; /* Reduced padding */
+    font-size: 0.8rem; /* Reduced font size */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .google-signin {
+    background: #fff;
+    border: 1px solid #000;
+  }
+  
+  .apple-signin {
+    background: #fff;
+    color: #333;
+    border: 1px solid #000;
+  }
+  
+  .google-signin img,
+  .apple-signin img {
+    width: 16px; /* Smaller icons */
+    margin-right: 8px;
+  }
+  

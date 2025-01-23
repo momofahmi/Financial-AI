@@ -1,0 +1,43 @@
+.data-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures proper spacing */
+  min-height: 100vh; /* Full height of the viewport */
+  background-color: #f0f4ff;
+  padding: 20px;
+}
+
+.data-header {
+  text-align: left; /* Align Financial AI to the left */
+  padding: 10px 20px; /* Add some spacing from the edges */
+}
+
+.company-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+.data-content {
+  flex: 1; /* Pushes the footer to the bottom */
+  text-align: center;
+  margin: 20px 0;
+}
+
+.data-footer {
+  text-align: center;
+}
+
+.back-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,64 @@
+.scenario-analysis {
+  margin: 20px;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa; /* Softer background color */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.scenario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.scenario-select {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.card {
+  padding: 20px;
+  background-color: #fff; /* White background for cards */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.scenario-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.scenario-details,
+.scenario-chart {
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 48%; /* Ensure spacing is consistent */
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.generate-report-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.generate-report-button:hover {
+  background-color: #0056b3;
+}

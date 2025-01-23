@@ -1,0 +1,30 @@
+/* Container styles */
+.marquee-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 0;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 15px;
+}
+
+/* Individual item styles */
+.marquee-item {
+  display: inline-block;
+  margin-right: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Price styling */
+.marquee-item span.price {
+  color: #1a73e8; /* Blue for prices */
+  font-weight: 700;
+}
+
+/* Name styling */
+.marquee-item span.name {
+  color: #555;
+}

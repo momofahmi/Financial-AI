@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Run Python Script</title>
+  </head>
+  <body>
+    <h1>Python Script Çalıştır</h1>
+    <button onclick="runPython()">Run Script</button>
+
+    <pre id="output"></pre>
+
+    <script>
+      async function runPython() {
+        const response = await fetch("/evdsTry.py");
+        const data = await response.text();
+        document.getElementById("output").textContent = data;
+      }
+    </script>
+  </body>
+</html>

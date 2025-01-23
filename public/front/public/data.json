@@ -1,0 +1,15 @@
+{
+    "date": "08-01-2025",
+    "values": {
+        "USD": 35.274,
+        "EUR": 36.554,
+        "GBP": 43.996,
+        "ToplamRezerv": 199.22,
+        "OnsAltin": 2662.84,
+        "BrutDisBorc": 525.8,
+        "KonutFiyatEndeksi": 153.23,
+        "SeneSonuEnflasyon": 27.24,
+        "GecelikBorclanmaFaizi": 55.66,
+        "OrtalamaYillikFaiz": 43.66
+    }
+}
