@@ -3,21 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Excel File</title>
+    <title>Excel Upload</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            width: 16rem;
+        }
+        .content {
+            margin-left: 16rem;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 class="text-2xl font-bold mb-6 text-center">Upload Excel File</h1>
-        <form id="uploadForm" action="/apicomp/company/upload" method="POST" enctype="multipart/form-data" class="space-y-4">
-            <div class="space-y-2">
-                <label for="file" class="block text-left">Choose Excel File:</label>
-                <input type="file" name="file" id="file" required class="w-full p-2 border rounded">
-            </div>
-            <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded">Upload</button>
-        </form>
+<body class="bg-gray-50 min-h-screen flex">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded">
+        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
+            <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI</h2>
+            <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">
+                &#9776;
+            </button>
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li>
+                    <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F3E0;</span> 
+                        <span class="sidebar-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C3;</span>
+                        <span class="sidebar-text">Income Statement</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C8;</span>
+                        <span class="sidebar-text">Financial Summary</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4CA;</span>
+                        <span class="sidebar-text">Operating Metrics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x2B07;</span>
+                        <span class="sidebar-text">Excel Upload</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4DD;</span>
+                        <span class="sidebar-text">Add Data Manually</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C8;</span>
+                        <span class="sidebar-text">Companies Informations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F5D1;</span>
+                        <span class="sidebar-text">Delete Companies</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
+    <!-- Main Content -->
+    <main class="content flex-1 p-5">
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-8">
+            <h1 class="text-2xl font-bold">Exel Upload</h1>
+            </div>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Upload File</h2>
+            <p class="text-gray-600 mb-6">Upload your Excel file containing financial data for analysis.</p>
+            <form id="uploadForm" action="/apicomp/company/upload" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <div>
+                    <label for="file" class="block text-sm font-medium text-gray-700">Choose Excel File:</label>
+                    <input type="file" name="file" id="file" required class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full py-3 bg-gray-500 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300 flex items-center justify-center space-x-2">
+                    <span>&#x21A9;</span>
+                    <span>Upload</span>
+                </button>
+            </form>
+        </section>
+    </main>
     <!-- Modal -->
     <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-md w-96 text-center">
@@ -49,6 +132,6 @@
             window.location.href = "/getCompany";
         });
     </script>
-    
+
 </body>
 </html>

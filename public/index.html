@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-login {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        .gradient-signup {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-12 rounded-lg shadow-lg flex flex-col md:flex-row items-center w-full max-w-5xl">
+        <!-- Left Section -->
+        <div class="text-center md:text-left md:w-1/2 md:pr-10 mb-6 md:mb-0 fade-in">
+            <h1 class="text-5xl font-extrabold mb-6 text-gray-800">Welcome to Financial AI</h1>
+            <p class="text-lg text-gray-600">
+                Your personalized financial assistant powered by AI. 
+                Join us and take control of your finances with ease and confidence.
+            </p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="space-y-6 md:w-1/2 flex flex-col items-center fade-in">
+            <a href="/login" class="block w-72 py-4 text-white text-center text-lg font-medium rounded-lg gradient-login hover:opacity-90 transition transform hover:scale-105">
+                Login
+            </a>
+            <a href="/signup" class="block w-72 py-4 text-white text-center text-lg font-medium rounded-lg gradient-signup hover:opacity-90 transition transform hover:scale-105">
+                Sign Up
+            </a>
+        </div>
+    </div>
+</body>
+</html>

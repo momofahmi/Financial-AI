@@ -2,36 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Viewer</title>
   <!-- Tailwind CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
     rel="stylesheet"
   />
+  <style>
+    .sidebar {
+      width: 16rem;
+    }
+    .content {
+      margin-left: 16rem;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-8">
-  <header class="mb-6">
-    <h1 class="text-3xl font-bold text-center">Company List</h1>
-  </header>
-
-  <!-- Table for listing user companies -->
-  <div class="bg-white shadow rounded mb-6">
-    <table class="min-w-full border-collapse">
-      <thead>
-        <tr class="border-b">
-          <th class="p-4 text-left">Company Name</th>
-          <th class="p-4 text-center">Action</th>
-        </tr>
-      </thead>
-      <tbody id="companyTableBody">
-        <!-- Filled by JavaScript -->
-      </tbody>
-    </table>
+<body class="bg-gray-100 min-h-screen flex">
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded">
+    <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
+      <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI</h2>
+      <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">
+        &#9776;
+      </button>
+    </div>
+    <nav class="mt-6">
+      <ul class="space-y-2">
+        <li>
+          <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F3E0;</span>
+            <span class="sidebar-text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F4C3;</span>
+            <span class="sidebar-text">Income Statement</span>
+          </a>
+        </li>
+        <li>
+          <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F4C8;</span>
+            <span class="sidebar-text">Financial Summary</span>
+          </a>
+        </li>
+        <li>
+          <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F4CA;</span>
+            <span class="sidebar-text">Operating Metrics</span>
+          </a>
+        </li>
+        <li>
+          <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x2B07;</span>
+            <span class="sidebar-text">Excel Upload</span>
+          </a>
+        </li>
+        <li>
+          <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F4DD;</span>
+            <span class="sidebar-text">Add Data Manually</span>
+          </a>
+        </li>
+        <li>
+          <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F4C8;</span>
+            <span class="sidebar-text">Companies Informations</span>
+          </a>
+        </li>
+        <li>
+          <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+            <span>&#x1F5D1;</span>
+            <span class="sidebar-text">Delete Companies</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 
-  <!-- Section to display the selected company's details -->
-  <div id="companyInfo" class="bg-white p-4 rounded shadow"></div>
+  <!-- Main Content -->
+  <div class="content flex-1 p-8">
+    <header class="mb-6">
+      <h1 class="text-3xl font-bold text-center">Company List</h1>
+    </header>
+
+    <!-- Table for listing user companies -->
+    <div class="bg-white shadow rounded mb-6">
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr class="border-b">
+            <th class="p-4 text-left">Company Name</th>
+            <th class="p-4 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody id="companyTableBody">
+          <!-- Filled by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section to display the selected company's details -->
+    <div id="companyInfo" class="bg-white p-4 rounded shadow"></div>
+  </div>
 
   <script>
     const companyTableBody = document.getElementById('companyTableBody');
@@ -42,8 +115,6 @@
 
     async function loadCompanies() {
       try {
-        // 1) Fetch all companies from your backend
-        // Adjust the endpoint as needed (e.g., "/apicomp/companies")
         const response = await fetch('/apicomp/companies');
         if (!response.ok) {
           throw new Error('Failed to fetch companies');
@@ -52,9 +123,7 @@
         const companies = await response.json();
         companyTableBody.innerHTML = '';
 
-        // 2) For each company, create a table row with a View button
         companies.forEach((company) => {
-          // If your Company schema has generalInfo.companyName
           const name = company.generalInfo?.companyName || 'Unnamed';
 
           const row = document.createElement('tr');
@@ -72,7 +141,6 @@
             </td>
           `;
 
-          // When "View" is clicked, fetch & display that company's info
           const viewButton = row.querySelector('button');
           viewButton.addEventListener('click', () => {
             fetchCompanyInfo(name);
@@ -90,11 +158,8 @@
       }
     }
 
-    // Fetch a specific company's info by name
     async function fetchCompanyInfo(companyName) {
       try {
-        // 3) Call your existing endpoint
-        // e.g., "/apicomp/company/get?companyName=..."
         const response = await fetch(`/apicomp/company/get?companyName=${encodeURIComponent(companyName)}`);
         const data = await response.json();
 
@@ -102,44 +167,28 @@
           throw new Error(data.message || 'Failed to fetch company info');
         }
 
-        // data.company should have the shape:
-        // {
-        //   generalInfo: { companyName, ... },
-        //   financialData: [ { date, standardizedCurrency, ... }, ... ]
-        // }
-        const company = data.company;
-        renderCompanyInfo(company);
+        renderCompanyInfo(data.company);
       } catch (error) {
         console.error(error);
         companyInfoDiv.innerHTML = `<p class="text-red-500">${error.message}</p>`;
       }
     }
 
-    // Render the selected company's info with a date dropdown
     function renderCompanyInfo(company) {
-      // Clear existing content
       companyInfoDiv.innerHTML = '';
 
-      // --- Header ---
       const title = document.createElement('h2');
       title.classList.add('text-xl', 'font-bold', 'mb-2');
       title.textContent = company.generalInfo.companyName;
       companyInfoDiv.appendChild(title);
 
-      // --- General Info ---
       const infoHtml = `
         <p><strong>Country of Exchange:</strong> ${company.generalInfo.countryOfExchange || 'N/A'}</p>
         <p><strong>Country of Headquarters:</strong> ${company.generalInfo.countryOfHeadquarters || 'N/A'}</p>
         <p><strong>TRBC Industry Group:</strong> ${company.generalInfo.trbcIndustryGroup || 'N/A'}</p>
-        <p><strong>CF Template:</strong> ${company.generalInfo.cfTemplate || 'N/A'}</p>
-        <p><strong>Consolidation Basis:</strong> ${company.generalInfo.consolidationBasis || 'N/A'}</p>
-        <p><strong>Scaling:</strong> ${company.generalInfo.scaling || 'N/A'}</p>
-        <p><strong>Period:</strong> ${company.generalInfo.period || 'N/A'}</p>
-        <p><strong>Export Date:</strong> ${company.generalInfo.exportDate || 'N/A'}</p>
       `;
       companyInfoDiv.insertAdjacentHTML('beforeend', infoHtml);
 
-      // If no financial data, show a message
       if (!company.financialData || company.financialData.length === 0) {
         const noDataMsg = document.createElement('p');
         noDataMsg.classList.add('mt-4', 'text-gray-500');
@@ -148,37 +197,31 @@
         return;
       }
 
-      // --- Financial Data Header ---
       const financialHeading = document.createElement('h3');
       financialHeading.classList.add('text-lg', 'font-semibold', 'mt-4');
       financialHeading.textContent = 'Financial Data:';
       companyInfoDiv.appendChild(financialHeading);
 
-      // Container for dropdown & details
       const container = document.createElement('div');
       container.classList.add('mt-2');
       companyInfoDiv.appendChild(container);
 
-      // Date label
       const dateLabel = document.createElement('label');
       dateLabel.setAttribute('for', 'dateSelector');
       dateLabel.classList.add('mr-2');
       dateLabel.textContent = 'Select Date:';
       container.appendChild(dateLabel);
 
-      // Dropdown select
       const dateSelector = document.createElement('select');
       dateSelector.id = 'dateSelector';
       dateSelector.classList.add('p-2', 'border', 'rounded');
       container.appendChild(dateSelector);
 
-      // Div to display the selected date's details
       const financialDetailsDiv = document.createElement('div');
       financialDetailsDiv.id = 'financialDetails';
       financialDetailsDiv.classList.add('mt-4');
       container.appendChild(financialDetailsDiv);
 
-      // Populate the dropdown with each date
       company.financialData.forEach((entry, index) => {
         const option = document.createElement('option');
         option.value = index;
@@ -186,7 +229,6 @@
         dateSelector.appendChild(option);
       });
 
-      // Show details for the selected date
       function showFinancialData(entry) {
         financialDetailsDiv.innerHTML = `
           <p><strong>Date:</strong> ${new Date(entry.date).toLocaleDateString()}</p>
@@ -203,14 +245,12 @@
         `;
       }
 
-      // Listen for changes in the dropdown
       dateSelector.addEventListener('change', () => {
         const selectedIndex = dateSelector.value;
         const selectedEntry = company.financialData[selectedIndex];
         showFinancialData(selectedEntry);
       });
 
-      // Show the first date's details by default
       showFinancialData(company.financialData[0]);
     }
   </script>

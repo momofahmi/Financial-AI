@@ -1,116 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual Data Input</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            width: 16rem;
+        }
+
+        .content {
+            margin-left: 16rem;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
-        <h1 class="text-2xl font-bold mb-6 text-center">Manual Data Input</h1>
-        <form id="manualInputForm" action="/apicomp/company" method="POST" class="space-y-6">
-            <!-- General Information -->
-            <div>
-                <h2 class="text-lg font-semibold mb-4">General Information</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="companyName" class="block text-sm font-medium">Company Name</label>
-                        <input type="text" name="generalInfo[companyName]" id="companyName" required class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="countryOfExchange" class="block text-sm font-medium">Country of Exchange</label>
-                        <input type="text" name="generalInfo[countryOfExchange]" id="countryOfExchange" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="countryOfHeadquarters" class="block text-sm font-medium">Country of Headquarters</label>
-                        <input type="text" name="generalInfo[countryOfHeadquarters]" id="countryOfHeadquarters" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="trbcIndustryGroup" class="block text-sm font-medium">TRBC Industry Group</label>
-                        <input type="text" name="generalInfo[trbcIndustryGroup]" id="trbcIndustryGroup" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="cfTemplate" class="block text-sm font-medium">CF Template</label>
-                        <input type="text" name="generalInfo[cfTemplate]" id="cfTemplate" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="consolidationBasis" class="block text-sm font-medium">Consolidation Basis</label>
-                        <input type="text" name="generalInfo[consolidationBasis]" id="consolidationBasis" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="scaling" class="block text-sm font-medium">Scaling</label>
-                        <input type="text" name="generalInfo[scaling]" id="scaling" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="period" class="block text-sm font-medium">Period</label>
-                        <input type="text" name="generalInfo[period]" id="period" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="exportDate" class="block text-sm font-medium">Export Date</label>
-                        <input type="date" name="generalInfo[exportDate]" id="exportDate" class="w-full p-2 border rounded">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Financial Data -->
-            <div>
-                <h2 class="text-lg font-semibold mb-4">Financial Data</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="date" class="block text-sm font-medium">Date</label>
-                        <input type="date" name="financialData[0][date]" id="date" required class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="standardizedCurrency" class="block text-sm font-medium">Standardized Currency</label>
-                        <input type="text" name="financialData[0][standardizedCurrency]" id="standardizedCurrency" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="revenue" class="block text-sm font-medium">Revenue from Goods & Services</label>
-                        <input type="number" step="any" name="financialData[0][revenueFromGoodsServices]" id="revenue" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="revenueTotal" class="block text-sm font-medium">Revenue from Business Activities - Total</label>
-                        <input type="number" step="any" name="financialData[0][revenueFromBusinessActivitiesTotal]" id="revenueTotal" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="costOfRevenue" class="block text-sm font-medium">Cost of Operating Revenue</label>
-                        <input type="number" step="any" name="financialData[0][costOfOperatingRevenue]" id="costOfRevenue" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="grossProfit" class="block text-sm font-medium">Gross Profit</label>
-                        <input type="number" step="any" name="financialData[0][grossProfitIndustrials]" id="grossProfit" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="operatingExpenses" class="block text-sm font-medium">Operating Expenses - Total</label>
-                        <input type="number" step="any" name="financialData[0][operatingExpensesTotal]" id="operatingExpenses" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="operatingProfit" class="block text-sm font-medium">Operating Profit</label>
-                        <input type="number" step="any" name="financialData[0][operatingProfitBeforeNonRecurring]" id="operatingProfit" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="incomeBeforeTaxes" class="block text-sm font-medium">Income before Taxes</label>
-                        <input type="number" step="any" name="financialData[0][incomeBeforeTaxes]" id="incomeBeforeTaxes" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="netIncome" class="block text-sm font-medium">Net Income after Tax</label>
-                        <input type="number" step="any" name="financialData[0][netIncomeAfterTax]" id="netIncome" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label for="ebitda" class="block text-sm font-medium">EBITDA</label>
-                        <input type="number" step="any" name="financialData[0][ebitda]" id="ebitda" class="w-full p-2 border rounded">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <button type="submit" id="sbutton" class="p-3 bg-blue-500 text-white rounded hover:bg-blue-600">Submit</button>
-            </div>
-        </form>
+
+<body class="bg-gray-50 min-h-screen flex">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50">
+        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
+            <h2 class="text-lg font-bold text-gray-700">Financial AI</h2>
+            <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">&#9776;</button>
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li>
+                    <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F3E0;</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C3;</span>
+                        <span>Income Statement</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C8;</span>
+                        <span>Financial Summary</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4CA;</span>
+                        <span>Operating Metrics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x2B07;</span>
+                        <span>Excel Upload</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4DD;</span>
+                        <span>Add Data Manually</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F4C8;</span>
+                        <span>Companies Informations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
+                        <span>&#x1F5D1;</span>
+                        <span>Delete Companies</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
-    <!-- Modal -->
+    <!-- Main Content -->
+    <div class="content flex-1 px-8 py-6">
+        <h1 class="text-3xl font-bold mb-8">Manual Data Input</h1>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <form id="manualInputForm" action="/apicomp/company" method="POST" class="space-y-6">
+                <!-- General Information -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">General Information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="companyName" class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input type="text" name="generalInfo[companyName]" id="companyName" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="countryOfExchange" class="block text-sm font-medium text-gray-700">Country of Exchange</label>
+                            <input type="text" name="generalInfo[countryOfExchange]" id="countryOfExchange" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="countryOfHeadquarters" class="block text-sm font-medium text-gray-700">Country of Headquarters</label>
+                            <input type="text" name="generalInfo[countryOfHeadquarters]" id="countryOfHeadquarters" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="trbcIndustryGroup" class="block text-sm font-medium text-gray-700">TRBC Industry Group</label>
+                            <input type="text" name="generalInfo[trbcIndustryGroup]" id="trbcIndustryGroup" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="cfTemplate" class="block text-sm font-medium text-gray-700">CF Template</label>
+                            <input type="text" name="generalInfo[cfTemplate]" id="cfTemplate" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="consolidationBasis" class="block text-sm font-medium text-gray-700">Consolidation Basis</label>
+                            <input type="text" name="generalInfo[consolidationBasis]" id="consolidationBasis" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="scaling" class="block text-sm font-medium text-gray-700">Scaling</label>
+                            <input type="text" name="generalInfo[scaling]" id="scaling" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="period" class="block text-sm font-medium text-gray-700">Period</label>
+                            <input type="text" name="generalInfo[period]" id="period" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="exportDate" class="block text-sm font-medium text-gray-700">Export Date</label>
+                            <input type="date" name="generalInfo[exportDate]" id="exportDate" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Data -->
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">Financial Data</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                            <input type="date" name="financialData[0][date]" id="date" required class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="standardizedCurrency" class="block text-sm font-medium text-gray-700">Standardized Currency</label>
+                            <input type="text" name="financialData[0][standardizedCurrency]" id="standardizedCurrency" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="revenue" class="block text-sm font-medium text-gray-700">Revenue from Goods & Services</label>
+                            <input type="number" step="any" name="financialData[0][revenueFromGoodsServices]" id="revenue" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="revenueTotal" class="block text-sm font-medium text-gray-700">Revenue from Business Activities - Total</label>
+                            <input type="number" step="any" name="financialData[0][revenueFromBusinessActivitiesTotal]" id="revenueTotal" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="costOfRevenue" class="block text-sm font-medium text-gray-700">Cost of Operating Revenue</label>
+                            <input type="number" step="any" name="financialData[0][costOfOperatingRevenue]" id="costOfRevenue" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="grossProfit" class="block text-sm font-medium text-gray-700">Gross Profit</label>
+                            <input type="number" step="any" name="financialData[0][grossProfitIndustrials]" id="grossProfit" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="operatingExpenses" class="block text-sm font-medium text-gray-700">Operating Expenses - Total</label>
+                            <input type="number" step="any" name="financialData[0][operatingExpensesTotal]" id="operatingExpenses" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="operatingProfit" class="block text-sm font-medium text-gray-700">Operating Profit</label>
+                            <input type="number" step="any" name="financialData[0][operatingProfitBeforeNonRecurring]" id="operatingProfit" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="incomeBeforeTaxes" class="block text-sm font-medium text-gray-700">Income before Taxes</label>
+                            <input type="number" step="any" name="financialData[0][incomeBeforeTaxes]" id="incomeBeforeTaxes" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="netIncome" class="block text-sm font-medium text-gray-700">Net Income after Tax</label>
+                            <input type="number" step="any" name="financialData[0][netIncomeAfterTax]" id="netIncome" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="ebitda" class="block text-sm font-medium text-gray-700">EBITDA</label>
+                            <input type="number" step="any" name="financialData[0][ebitda]" id="ebitda" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" id="sbutton" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <!-- Modal -->
     <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-md w-96 text-center">
             <h2 class="text-xl font-bold mb-4">Success</h2>
@@ -131,4 +207,5 @@
         };
     </script>
 </body>
+
 </html>

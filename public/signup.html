@@ -4,22 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <!-- TailwindCSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-signup {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 class="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+    <!-- Card Container -->
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <!-- Logo / Header -->
+        <div class="text-center mb-6">
+            <img src="/images/file.png" alt="Logo" class="mx-auto w-16 h-16">
+            <h1 class="text-3xl font-bold text-gray-800">Create Your Account</h1>
+            <p class="text-gray-600">Sign up to get started</p>
+        </div>
+        <!-- Signup Form -->
         <form id="signupForm" class="space-y-4">
-            <input type="text" id="username" placeholder="Username" required class="w-full p-2 border rounded">
-            <input type="email" id="email" placeholder="Email" required class="w-full p-2 border rounded">
-            <input type="password" id="password" placeholder="Password" required class="w-full p-2 border rounded">
-            <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded">Sign Up</button>
+            <input 
+                type="text" 
+                id="username" 
+                placeholder="Username" 
+                required 
+                class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Email" 
+                required 
+                class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <input 
+                type="password" 
+                id="password" 
+                placeholder="Password" 
+                required 
+                class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <div class="flex items-center space-x-2">
+                <input 
+                    type="checkbox" 
+                    id="terms" 
+                    required 
+                    class="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                >
+                <label for="terms" class="text-sm text-gray-600">
+                    I agree to the <a href="/terms.html" class="text-blue-500 hover:underline">Terms and Conditions</a>
+                </label>
+            </div>
+            <button 
+                type="submit" 
+                class="w-full py-3 text-lg text-white font-medium rounded-lg gradient-signup hover:opacity-90 transition duration-300"
+            >
+                Sign Up
+            </button>
         </form>
-        <p class="mt-4 text-center">
-            Already have an account? <a href="/login.html" class="text-blue-500">Login</a>
+        <!-- Login Link -->
+        <p class="mt-6 text-center text-gray-600">
+            Already have an account? 
+            <a href="/login.html" class="text-blue-500 hover:underline">Login</a>
         </p>
     </div>
+    <!-- JavaScript -->
     <script src="/js/signup.js"></script>
 </body>
 </html>
-

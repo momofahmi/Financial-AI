@@ -1,32 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 min-h-screen">
-    <nav class="bg-white shadow-md p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Dashboard</h1>
-            <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
-        </div>
-    </nav>
-    <main class="container mx-auto mt-8 p-4">
-        <h2 class="text-xl font-semibold mb-4">Welcome to your dashboard!</h2>
-        <p>This is a protected page. You can only see this if you're logged in.</p>
-    </main>
-    <div class="bg-white p-8 rounded-lg shadow-md w-full text-center mt-6">
-        <h1 class="text-2xl font-bold mb-6">Welcome to the API</h1>
-        <div class="flex space-x-4 justify-center">
-            <a href="/manual-input" class="p-2 bg-blue-500 text-white rounded">Add Data Manually</a>
-            <a href="/upload-file" class="p-2 bg-green-500 text-white rounded">Upload Excel</a>
-            <a href="/getCompany" class="p-2 bg-yellow-500 text-white rounded">Get Company Info</a>
-            <a href="/deleteCompany" class="p-2 bg-red-500 text-white rounded">Delete Company Info</a>
-        </div>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        transition: width 0.3s ease-in-out;
+        overflow: hidden;
+      }
+      .sidebar.collapsed {
+        width: 4rem;
+      }
+      .sidebar-expanded {
+        width: 16rem;
+      }
+      .content {
+        transition: margin-left 0.3s ease-in-out;
+      }
+      .content.collapsed {
+        margin-left: 4rem;
+        width: calc(100% - 4rem);
+      }
+      .content-expanded {
+        margin-left: 16rem;
+        width: calc(100% - 16rem);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded"
+    >
+      <div
+        class="flex items-center justify-between px-4 py-4 border-b bg-gray-100"
+      >
+        <h2 class="text-lg font-bold text-gray-700 sidebar-text">
+          Financial AI
+        </h2>
+        <button
+          id="toggleSidebar"
+          class="text-gray-600 hover:text-gray-800 text-xl"
+        >
+          &#9776;
+        </button>
+      </div>
+      <nav class="mt-6">
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/dashboard"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F3E0;</span>
+              <span class="sidebar-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/income-statement"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C3;</span>
+              <span class="sidebar-text">Income Statement</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/financial-summary"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Financial Summary</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/metrics"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4CA;</span>
+              <span class="sidebar-text">Operating Metrics</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/upload-file"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x2B07;</span>
+              <span class="sidebar-text">Excel Upload</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/manual-input"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4DD;</span>
+              <span class="sidebar-text">Add Data Manually</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/getCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Companies Informations</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/deleteCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F5D1;</span>
+              <span class="sidebar-text">Delete Companies</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <script src="/js/dashboard.js"></script>
-</body>
-</html>
 
+    <!-- Main Content -->
+    <div id="content" class="content content-expanded">
+      <nav class="bg-white shadow-md p-3 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Dashboard</h1>
+        <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded">
+          Logout
+        </button>
+      </nav>
+      <main class="container mx-auto mt-8 p-4">
+        <div class="bg-gray-100 min-h-screen p-8">
+          <!-- Dashboard Header -->
+          <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
+
+          <!-- Cards Section -->
+          <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"></section>
+
+          <!-- Table Section -->
+          <section class="bg-white border p-10 shadow-md">
+            <h2 class="text-xl font-bold mb-4">Companies Overview</h2>
+            <p class="text-sm text-gray-500 mb-4">
+              Select a company to view detailed information
+            </p>
+            <!-- Search Bar -->
+            <input
+              type="text"
+              placeholder="Search companies..."
+              class="border p-2 mb-4 w-full rounded-lg shadow-sm"
+            />
+            <!-- Table -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+              <table class="min-w-full table-auto">
+                <thead class="bg-gray-50 text-gray-600 text-left">
+                  <tr>
+                    <th class="py-3 px-6">Company Name</th>
+                    <th class="py-3 px-6">Revenue</th>
+                    <th class="py-3 px-6">Profit</th>
+                    <th class="py-3 px-6">Growth Rate</th>
+                    <th class="py-3 px-6">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="companyTable">
+                  <!-- Rows will be populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            id="companyDetails"
+            class="mt-8 hidden bg-white shadow-md rounded-lg p-6"
+          >
+            <p id="detailsHeader"></p>
+            <p id="detailsContent" class="text-gray-600">
+              <!-- Details will be dynamically populated -->
+            </p>
+            <button
+              id="closeDetails"
+              class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600"
+            >
+              Close Details
+            </button>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const content = document.getElementById("content");
+      const toggleSidebar = document.getElementById("toggleSidebar");
+
+      toggleSidebar.addEventListener("click", () => {
+        if (sidebar.classList.contains("sidebar-expanded")) {
+          sidebar.classList.remove("sidebar-expanded");
+          sidebar.classList.add("collapsed");
+          content.classList.remove("content-expanded");
+          content.classList.add("collapsed");
+          document
+            .querySelectorAll(".sidebar-text")
+            .forEach((el) => el.classList.add("hidden"));
+        } else {
+          sidebar.classList.remove("collapsed");
+          sidebar.classList.add("sidebar-expanded");
+          content.classList.remove("collapsed");
+          content.classList.add("content-expanded");
+          document
+            .querySelectorAll(".sidebar-text")
+            .forEach((el) => el.classList.remove("hidden"));
+        }
+      });
+
+      // Logout functionality
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        fetch("/logout", {
+          method: "POST",
+          credentials: "include",
+        })
+        
+      });
+    </script>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>
