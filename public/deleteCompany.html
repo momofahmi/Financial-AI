@@ -1,157 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delete Company Information</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    .sidebar {
-      width: 16rem;
-    }
-    .content {
-      margin-left: 16rem;
-    }
-  </style>
-</head>
-<body class="bg-gray-100 min-h-screen flex">
-  <!-- Sidebar -->
-  <div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded">
-    <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
-      <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI</h2>
-      <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">
-        &#9776;
-      </button>
-    </div>
-    <nav class="mt-6">
-      <ul class="space-y-2">
-        <li>
-          <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F3E0;</span>
-            <span class="sidebar-text">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C3;</span>
-            <span class="sidebar-text">Income Statement</span>
-          </a>
-        </li>
-        <li>
-          <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C8;</span>
-            <span class="sidebar-text">Financial Summary</span>
-          </a>
-        </li>
-        <li>
-          <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4CA;</span>
-            <span class="sidebar-text">Operating Metrics</span>
-          </a>
-        </li>
-        <li>
-          <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x2B07;</span>
-            <span class="sidebar-text">Excel Upload</span>
-          </a>
-        </li>
-        <li>
-          <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4DD;</span>
-            <span class="sidebar-text">Add Data Manually</span>
-          </a>
-        </li>
-        <li>
-          <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C8;</span>
-            <span class="sidebar-text">Companies Informations</span>
-          </a>
-        </li>
-        <li>
-          <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F5D1;</span>
-            <span class="sidebar-text">Delete Companies</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Main Content -->
-  <div class="content flex-1 p-8">
-    <h1 class="text-2xl font-bold mb-6 text-center">Manage Companies</h1>
-    
-    <!-- Table to display companies -->
-    <table class="min-w-full bg-white border rounded">
-      <thead>
-        <tr>
-          <th class="px-4 py-2 border-b">Company Name</th>
-          <th class="px-4 py-2 border-b">Action</th>
-        </tr>
-      </thead>
-      <tbody id="companyTableBody">
-        <!-- Rows will be populated by JavaScript -->
-      </tbody>
-    </table>
-
-    <!-- Result or error message -->
-    <div id="deleteResult" class="mt-4 text-center"></div>
-  </div>
-
-  <!-- Confirmation Modal -->
-  <div id="confirmModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-md w-80">
-      <h2 class="text-xl font-bold mb-4 text-center">Are you sure?</h2>
-      <p class="text-center mb-4">Do you really want to delete this company? This action cannot be undone.</p>
-      <div class="flex justify-between">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Company Information</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        width: 16rem;
+      }
+      .content {
+        margin-left: 16rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded"
+    >
+      <div
+        class="flex items-center justify-between px-4 py-3 border-b bg-gray-100"
+      >
+        <h2 class="text-lg font-bold text-gray-700 sidebar-text">
+          Financial AI
+        </h2>
         <button
-          id="cancelButton"
-          class="w-1/2 mr-2 p-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+          id="toggleSidebar"
+          class="text-gray-600 hover:text-gray-800 text-xl"
         >
-          Cancel
+          &#9776;
         </button>
+      </div>
+      <nav class="mt-6">
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/dashboard"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F3E0;</span>
+              <span class="sidebar-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/income-statement"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C3;</span>
+              <span class="sidebar-text">Income Statement</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/financial-summary"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Financial Summary</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/metrics"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4CA;</span>
+              <span class="sidebar-text">Operating Metrics</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/upload-file"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x2B07;</span>
+              <span class="sidebar-text">Excel Upload</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/manual-input"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4DD;</span>
+              <span class="sidebar-text">Add Data Manually</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/getCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Companies Informations</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/deleteCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F5D1;</span>
+              <span class="sidebar-text">Delete Companies</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="p-4">
         <button
-          id="confirmButton"
-          class="w-1/2 ml-2 p-2 bg-red-500 text-white rounded hover:bg-red-600"
+          id="logoutBtn"
+          class="bg-red-500 text-white w-full py-3 rounded-lg hover:bg-red-600 font-bold"
         >
-          Confirm
+          Logout
         </button>
       </div>
     </div>
-  </div>
 
-  <script>
-    // Elements
-    const companyTableBody = document.getElementById('companyTableBody');
-    const confirmModal = document.getElementById('confirmModal');
-    const confirmButton = document.getElementById('confirmButton');
-    const cancelButton = document.getElementById('cancelButton');
-    const deleteResult = document.getElementById('deleteResult');
+    <!-- Main Content -->
+    <div class="content flex-1 p-8">
+      <h1 class="text-2xl font-bold mb-6 text-center">Manage Companies</h1>
 
-    let companyToDelete = null; // Will store the selected company's name or ID
+      <!-- Table to display companies -->
+      <table class="min-w-full bg-white border rounded">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 border-b">Company Name</th>
+            <th class="px-4 py-2 border-b">Action</th>
+          </tr>
+        </thead>
+        <tbody id="companyTableBody">
+          <!-- Rows will be populated by JavaScript -->
+        </tbody>
+      </table>
 
-    // 1. Fetch all companies for the logged-in user when page loads
-    window.addEventListener('DOMContentLoaded', async () => {
-      await loadCompanies();
-    });
+      <!-- Result or error message -->
+      <div id="deleteResult" class="mt-4 text-center"></div>
+    </div>
 
-    async function loadCompanies() {
-      try {
-        const response = await fetch('/apicomp/companies'); // GET request
-        const companies = await response.json();
+    <!-- Confirmation Modal -->
+    <div
+      id="confirmModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-md w-80">
+        <h2 class="text-xl font-bold mb-4 text-center">Are you sure?</h2>
+        <p class="text-center mb-4">
+          Do you really want to delete this company? This action cannot be
+          undone.
+        </p>
+        <div class="flex justify-between">
+          <button
+            id="cancelButton"
+            class="w-1/2 mr-2 p-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+          <button
+            id="confirmButton"
+            class="w-1/2 ml-2 p-2 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
 
-        // Clear the table body
-        companyTableBody.innerHTML = '';
+    <script>
+      // Elements
+      const companyTableBody = document.getElementById("companyTableBody");
+      const confirmModal = document.getElementById("confirmModal");
+      const confirmButton = document.getElementById("confirmButton");
+      const cancelButton = document.getElementById("cancelButton");
+      const deleteResult = document.getElementById("deleteResult");
 
-        // Populate the table with each company
-        companies.forEach((company) => {
-          const name = company.generalInfo?.companyName || 'Unnamed';
+      let companyToDelete = null; // Will store the selected company's name or ID
 
-          const row = document.createElement('tr');
-          row.innerHTML = `
+      // 1. Fetch all companies for the logged-in user when page loads
+      window.addEventListener("DOMContentLoaded", async () => {
+        await loadCompanies();
+      });
+
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+          const data = await response.json();
+          if (data.success) {
+            window.location.href = "/login.html";
+          } else {
+            alert("Logout failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Logout error:", error);
+          alert("An error occurred during logout. Please try again.");
+        }
+      });
+
+      async function loadCompanies() {
+        try {
+          const response = await fetch("/apicomp/companies"); // GET request
+          const companies = await response.json();
+
+          // Clear the table body
+          companyTableBody.innerHTML = "";
+
+          // Populate the table with each company
+          companies.forEach((company) => {
+            const name = company.generalInfo?.companyName || "Unnamed";
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
             <td class="px-4 py-2 border-b">${name}</td>
             <td class="px-4 py-2 border-b text-center">
               <button 
@@ -163,55 +231,57 @@
             </td>
           `;
 
-          const deleteButton = row.querySelector('button');
-          deleteButton.addEventListener('click', () => {
-            companyToDelete = name;
-            confirmModal.classList.remove('hidden'); // show modal
+            const deleteButton = row.querySelector("button");
+            deleteButton.addEventListener("click", () => {
+              companyToDelete = name;
+              confirmModal.classList.remove("hidden"); // show modal
+            });
+
+            companyTableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Failed to load companies:", error);
+          deleteResult.innerHTML = `<p class="text-red-500">Error fetching companies.</p>`;
+        }
+      }
+
+      // Cancel deletion
+      cancelButton.addEventListener("click", () => {
+        confirmModal.classList.add("hidden");
+        companyToDelete = null;
+      });
+
+      // Confirm deletion
+      confirmButton.addEventListener("click", async () => {
+        confirmModal.classList.add("hidden");
+        if (!companyToDelete) return;
+
+        deleteResult.innerHTML = ""; // Clear old messages
+
+        try {
+          const response = await fetch("/apicomp/company/delete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ companyName: companyToDelete }),
           });
 
-          companyTableBody.appendChild(row);
-        });
-      } catch (error) {
-        console.error('Failed to load companies:', error);
-        deleteResult.innerHTML = `<p class="text-red-500">Error fetching companies.</p>`;
-      }
-    }
-
-    // Cancel deletion
-    cancelButton.addEventListener('click', () => {
-      confirmModal.classList.add('hidden');
-      companyToDelete = null;
-    });
-
-    // Confirm deletion
-    confirmButton.addEventListener('click', async () => {
-      confirmModal.classList.add('hidden');
-      if (!companyToDelete) return;
-      
-      deleteResult.innerHTML = ''; // Clear old messages
-
-      try {
-        const response = await fetch('/apicomp/company/delete', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ companyName: companyToDelete }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          deleteResult.innerHTML = `<p class="text-green-500">${data.message}</p>`;
-          await loadCompanies();
-        } else {
-          const errorData = await response.json();
-          deleteResult.innerHTML = `<p class="text-red-500">Error: ${errorData.message || 'Failed to delete company'}</p>`;
+          if (response.ok) {
+            const data = await response.json();
+            deleteResult.innerHTML = `<p class="text-green-500">${data.message}</p>`;
+            await loadCompanies();
+          } else {
+            const errorData = await response.json();
+            deleteResult.innerHTML = `<p class="text-red-500">Error: ${
+              errorData.message || "Failed to delete company"
+            }</p>`;
+          }
+        } catch (error) {
+          console.error("Delete request failed:", error);
+          deleteResult.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+        } finally {
+          companyToDelete = null;
         }
-      } catch (error) {
-        console.error('Delete request failed:', error);
-        deleteResult.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
-      } finally {
-        companyToDelete = null;
-      }
-    });
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>

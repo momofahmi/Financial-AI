@@ -1,81 +1,123 @@
-<div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded">
-    <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
-        <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI </h2>
-        <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">
-            &#9776;
-        </button>
-    </div>
-    <nav class="mt-6">
-        <ul class="space-y-2">
-            <li>
-                <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F5D9;</span>
-                    <span class="sidebar-text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F4C3;</span>
-                    <span class="sidebar-text">Income Statement</span>
-                </a>
-            </li>
-            <li>
-                <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F4C8;</span>
-                    <span class="sidebar-text">Financial Summary</span>
-                </a>
-            </li>
-            <li>
-                <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F4CA;</span>
-                    <span class="sidebar-text">Operating Metrics</span>
-                </a>
-            </li>
-            <li>
-                <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x2B07;</span>
-                    <span class="sidebar-text">Excel Upload</span>
-                </a>
-            </li>
-            <li>
-                <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F4DD;</span>
-                    <span class="sidebar-text">Add Data Manually</span>
-                </a>
-            </li>
-            <li>
-                <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F4C8;</span>
-                    <span class="sidebar-text">Companies Informations</span>
-                </a>
-            </li>
-            <li>
-                <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-                    <span>&#x1F5D1;</span>
-                    <span class="sidebar-text">Delete Companies</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+<div
+  id="sidebar"
+  class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded"
+>
+  <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
+    <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI</h2>
+    <button
+      id="toggleSidebar"
+      class="text-gray-600 hover:text-gray-800 text-xl"
+    >
+      &#9776;
+    </button>
+  </div>
+  <nav class="mt-6">
+    <ul class="space-y-2">
+      <li>
+        <a
+          href="/dashboard"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F5D9;</span>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/income-statement"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F4C3;</span>
+          <span class="sidebar-text">Income Statement</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/financial-summary"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F4C8;</span>
+          <span class="sidebar-text">Financial Summary</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/metrics"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F4CA;</span>
+          <span class="sidebar-text">Operating Metrics</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/upload-file"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x2B07;</span>
+          <span class="sidebar-text">Excel Upload</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/manual-input"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F4DD;</span>
+          <span class="sidebar-text">Add Data Manually</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/getCompany"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F4C8;</span>
+          <span class="sidebar-text">Companies Informations</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="/deleteCompany"
+          class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+        >
+          <span>&#x1F5D1;</span>
+          <span class="sidebar-text">Delete Companies</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="p-4">
+    <button
+      id="logoutBtn"
+      class="bg-red-500 text-white w-full py-3 rounded-lg hover:bg-red-600 font-bold"
+    >
+      Logout
+    </button>
+  </div>
 </div>
 
 <script>
-    // Sidebar Toggle Logic
-    const sidebar = document.getElementById('sidebar');
-    const toggleSidebar = document.getElementById('toggleSidebar');
+  // Sidebar Toggle Logic
+  const sidebar = document.getElementById("sidebar");
+  const toggleSidebar = document.getElementById("toggleSidebar");
 
-    toggleSidebar.addEventListener('click', () => {
-        const mainContent = document.querySelector('.main-content');
-        if (sidebar.classList.contains('sidebar-expanded')) {
-            sidebar.classList.remove('sidebar-expanded');
-            sidebar.classList.add('collapsed');
-            mainContent.style.marginLeft = '4rem';
-            document.querySelectorAll('.sidebar-text').forEach((el) => el.classList.add('hidden'));
-        } else {
-            sidebar.classList.remove('collapsed');
-            sidebar.classList.add('sidebar-expanded');
-            mainContent.style.marginLeft = '16rem';
-            document.querySelectorAll('.sidebar-text').forEach((el) => el.classList.remove('hidden'));
-        }
-    });
+  toggleSidebar.addEventListener("click", () => {
+    const mainContent = document.querySelector(".main-content");
+    if (sidebar.classList.contains("sidebar-expanded")) {
+      sidebar.classList.remove("sidebar-expanded");
+      sidebar.classList.add("collapsed");
+      mainContent.style.marginLeft = "4rem";
+      document
+        .querySelectorAll(".sidebar-text")
+        .forEach((el) => el.classList.add("hidden"));
+    } else {
+      sidebar.classList.remove("collapsed");
+      sidebar.classList.add("sidebar-expanded");
+      mainContent.style.marginLeft = "16rem";
+      document
+        .querySelectorAll(".sidebar-text")
+        .forEach((el) => el.classList.remove("hidden"));
+    }
+  });
 </script>
