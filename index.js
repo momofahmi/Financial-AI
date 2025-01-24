@@ -67,7 +67,7 @@ app.get('/signup', checkAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', checkAuthCom,(req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
