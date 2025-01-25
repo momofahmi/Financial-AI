@@ -120,7 +120,6 @@ const uploadExcel = async (req, res) => {
     try {
         const filePath = req.file.path; // File uploaded by user
         const pythonScriptPath = path.join(__dirname, '../python_scripts/process_excel.py');
-        console.log('pythonScriptPath:', pythonScriptPath);
         const python = spawn('python3', [pythonScriptPath, filePath]);
 
         let data = '';
@@ -249,7 +248,7 @@ const uploadExcel = async (req, res) => {
 const getCompanyByName = async (req, res) => {
     try {
         const { companyName } = req.query;
-        console.log("company name", companyName);
+        //console.log("company name", companyName);
         if (!companyName) {
             return res.status(400).json({ error: 'Company name is required' });
         }
@@ -301,7 +300,7 @@ const getAllUserCompanies = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    console.log(user.companies);
+    //console.log(user.companies);
 
     // 3. Return the list of all companies
     res.status(200).json(user.companies);

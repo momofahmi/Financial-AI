@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv');
+const { spawn } = require('child_process');
+mongoose.set('strictQuery', true);
 
 /************** */
 const CompanyRoutes = require('./routes/CompanyR');
@@ -27,6 +29,43 @@ const checkAuthCom = require('./middleware/checkAuthCom');
 
 app.get('/', checkAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'indexx.html'));
+});
+
+const runPythonScript = async (param) => {
+  return new Promise((resolve, reject) => {
+    const pythonProcess = spawn('python3', ['LSTM.py', param]);
+
+    let output = '';
+    pythonProcess.stdout.on('data', (data) => {
+      output += data.toString();
+      console.log(`Output: ${data}`);
+      
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(`Error: ${data}`);
+    });
+
+    pythonProcess.on('close', (code) => {
+      if (code === 0) {
+        resolve(output);
+      } else {
+        reject(new Error('Python script failed'));
+      }
+    });
+  });
+};
+
+app.get('/run-model', async (req, res) => {
+  try {
+    const documentId = req.query.id || "Tofas Turk Otomobil Fabrikasi AS (TOASO.IS)";
+    const output = await runPythonScript(documentId);
+    const result = JSON.parse(output);
+    res.json(result);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Error running Python script or parsing output');
+  }
 });
 
 app.get('/manual-input', checkAuthCom, (req, res) => {
@@ -62,6 +101,9 @@ app.get('/signup', checkAuth, (req, res) => {
 
 app.get('/dashboard', checkAuthCom, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
+app.get('/metrics', checkAuthCom, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'metrics.html'));
 });
 
 app.use('/apicomp', checkAuthCom, CompanyRoutes);
