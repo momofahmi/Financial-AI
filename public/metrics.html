@@ -400,7 +400,7 @@
       loadingDiv.style.display = "block";
       
       // Fetch the model data
-      const response = await fetch(`http://localhost:5000/run-model?id=${companyName}`);
+      const response = await fetch(`http://localhost:5000/run-model?id`);
       const data = await response.json();
 
       // Hide loading spinner
@@ -412,7 +412,7 @@
       // Prepare the chart data
       const ctx = document.getElementById("myChart").getContext("2d");
       const labels = Array.from(
-        { length: data.predictions.length },
+        { length: `${data.predictions.length}`},
         (_, i) => `Q${i + 1}`
       );
 
