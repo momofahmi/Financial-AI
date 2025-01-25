@@ -21,7 +21,7 @@ collection= db['test6']  # Replace 'test6/Documents' with your collection path
 
 def main(idx):
 
-    document = collection.find_one({"_id": "Tofas Turk Otomobil Fabrikasi AS (TOASO.IS)"}) # This could be input by the user.
+    document = collection.find_one({"_id": idx}) # This could be input by the user.
 
     if not document:
         exit()
