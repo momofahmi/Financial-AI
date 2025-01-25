@@ -59,6 +59,7 @@ const runPythonScript = async (param) => {
 app.get('/run-model', async (req, res) => {
   try {
     const documentId = req.query.id || "Tofas Turk Otomobil Fabrikasi AS (TOASO.IS)";
+    console.log('Running Python script with document ID:', documentId);
     const output = await runPythonScript(documentId);
     const result = JSON.parse(output);
     res.json(result);
