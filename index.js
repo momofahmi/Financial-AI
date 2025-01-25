@@ -26,7 +26,7 @@ const checkAuth = require("./middleware/checkAuth");
 const checkAuthCom = require("./middleware/checkAuthCom");
 
 app.get("/", checkAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "indexx.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.get("/manual-input", checkAuthCom, (req, res) => {
