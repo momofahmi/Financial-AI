@@ -58,7 +58,7 @@ const runPythonScript = async (param) => {
 
 app.get('/run-model', async (req, res) => {
   try {
-    const documentId = req.query.id || "Tofas Turk Otomobil Fabrikasi AS (TOASO.IS)";
+    const documentId = req.query.id ;
     const output = await runPythonScript(documentId);
     const result = JSON.parse(output);
     res.json(result);
@@ -122,5 +122,3 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Failed to connect to MongoDB:', err));
-
-
