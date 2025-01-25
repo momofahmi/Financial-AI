@@ -20,7 +20,7 @@ collection= db['test6']  # Replace 'test6/Documents' with your collection path
 
 
 def main(idx):
-
+   
     document = collection.find_one({"_id": idx}) # This could be input by the user.
 
     if not document:

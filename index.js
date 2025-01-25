@@ -38,7 +38,7 @@ const runPythonScript = async (param) => {
     let output = '';
     pythonProcess.stdout.on('data', (data) => {
       output += data.toString();
-      console.log(`Output: ${data}`);
+     
       
     });
 

@@ -400,7 +400,7 @@
       loadingDiv.style.display = "block";
       
       // Fetch the model data
-      const response = await fetch(`http://localhost:5000/run-model?id`);
+      const response = await fetch(`http://localhost:5000/run-model?id=${companyName}`);
       const data = await response.json();
 
       // Hide loading spinner
