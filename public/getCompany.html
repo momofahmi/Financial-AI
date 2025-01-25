@@ -1,135 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Company Viewer</title>
-  <!-- Tailwind CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    .sidebar {
-      width: 16rem;
-    }
-    .content {
-      margin-left: 16rem;
-    }
-  </style>
-</head>
-<body class="bg-gray-100 min-h-screen flex">
-  <!-- Sidebar -->
-  <div id="sidebar" class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded">
-    <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-100">
-      <h2 class="text-lg font-bold text-gray-700 sidebar-text">Financial AI</h2>
-      <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 text-xl">
-        &#9776;
-      </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Viewer</title>
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar {
+        width: 16rem;
+      }
+      .content {
+        margin-left: 16rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded"
+    >
+      <div
+        class="flex items-center justify-between px-4 py-3 border-b bg-gray-100"
+      >
+        <h2 class="text-lg font-bold text-gray-700 sidebar-text">
+          Financial AI
+        </h2>
+        <button
+          id="toggleSidebar"
+          class="text-gray-600 hover:text-gray-800 text-xl"
+        >
+          &#9776;
+        </button>
+      </div>
+      <nav class="mt-6">
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/dashboard"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F3E0;</span>
+              <span class="sidebar-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/income-statement"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C3;</span>
+              <span class="sidebar-text">Income Statement</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/financial-summary"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Financial Summary</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/metrics"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4CA;</span>
+              <span class="sidebar-text">Operating Metrics</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/upload-file"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x2B07;</span>
+              <span class="sidebar-text">Excel Upload</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/manual-input"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4DD;</span>
+              <span class="sidebar-text">Add Data Manually</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/getCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F4C8;</span>
+              <span class="sidebar-text">Companies Informations</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/deleteCompany"
+              class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
+            >
+              <span>&#x1F5D1;</span>
+              <span class="sidebar-text">Delete Companies</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="p-4">
+        <button
+          id="logoutBtn"
+          class="bg-red-500 text-white w-full py-3 rounded-lg hover:bg-red-600 font-bold"
+        >
+          Logout
+        </button>
+      </div>
     </div>
-    <nav class="mt-6">
-      <ul class="space-y-2">
-        <li>
-          <a href="/dashboard" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F3E0;</span>
-            <span class="sidebar-text">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="/income-statement" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C3;</span>
-            <span class="sidebar-text">Income Statement</span>
-          </a>
-        </li>
-        <li>
-          <a href="/financial-summary" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C8;</span>
-            <span class="sidebar-text">Financial Summary</span>
-          </a>
-        </li>
-        <li>
-          <a href="/metrics" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4CA;</span>
-            <span class="sidebar-text">Operating Metrics</span>
-          </a>
-        </li>
-        <li>
-          <a href="/upload-file" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x2B07;</span>
-            <span class="sidebar-text">Excel Upload</span>
-          </a>
-        </li>
-        <li>
-          <a href="/manual-input" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4DD;</span>
-            <span class="sidebar-text">Add Data Manually</span>
-          </a>
-        </li>
-        <li>
-          <a href="/getCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F4C8;</span>
-            <span class="sidebar-text">Companies Informations</span>
-          </a>
-        </li>
-        <li>
-          <a href="/deleteCompany" class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded">
-            <span>&#x1F5D1;</span>
-            <span class="sidebar-text">Delete Companies</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
 
-  <!-- Main Content -->
-  <div class="content flex-1 p-8">
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold text-center">Company List</h1>
-    </header>
+    <!-- Main Content -->
+    <div class="content flex-1 p-8">
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold text-center">Company List</h1>
+      </header>
 
-    <!-- Table for listing user companies -->
-    <div class="bg-white shadow rounded mb-6">
-      <table class="min-w-full border-collapse">
-        <thead>
-          <tr class="border-b">
-            <th class="p-4 text-left">Company Name</th>
-            <th class="p-4 text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody id="companyTableBody">
-          <!-- Filled by JavaScript -->
-        </tbody>
-      </table>
+      <!-- Table for listing user companies -->
+      <div class="bg-white shadow rounded mb-6">
+        <table class="min-w-full border-collapse">
+          <thead>
+            <tr class="border-b">
+              <th class="p-4 text-left">Company Name</th>
+              <th class="p-4 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="companyTableBody">
+            <!-- Filled by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section to display the selected company's details -->
+      <div id="companyInfo" class="bg-white p-4 rounded shadow"></div>
     </div>
 
-    <!-- Section to display the selected company's details -->
-    <div id="companyInfo" class="bg-white p-4 rounded shadow"></div>
-  </div>
+    <script>
+      const companyTableBody = document.getElementById("companyTableBody");
+      const companyInfoDiv = document.getElementById("companyInfo");
 
-  <script>
-    const companyTableBody = document.getElementById('companyTableBody');
-    const companyInfoDiv = document.getElementById('companyInfo');
+      // On page load, fetch all companies
+      window.addEventListener("DOMContentLoaded", loadCompanies);
 
-    // On page load, fetch all companies
-    window.addEventListener('DOMContentLoaded', loadCompanies);
+      const logoutBtn = document.getElementById("logoutBtn");
 
-    async function loadCompanies() {
-      try {
-        const response = await fetch('/apicomp/companies');
-        if (!response.ok) {
-          throw new Error('Failed to fetch companies');
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+          const data = await response.json();
+          if (data.success) {
+            window.location.href = "/login.html";
+          } else {
+            alert("Logout failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Logout error:", error);
+          alert("An error occurred during logout. Please try again.");
         }
+      });
+      async function loadCompanies() {
+        try {
+          const response = await fetch("/apicomp/companies");
+          if (!response.ok) {
+            throw new Error("Failed to fetch companies");
+          }
 
-        const companies = await response.json();
-        companyTableBody.innerHTML = '';
+          const companies = await response.json();
+          companyTableBody.innerHTML = "";
 
-        companies.forEach((company) => {
-          const name = company.generalInfo?.companyName || 'Unnamed';
+          companies.forEach((company) => {
+            const name = company.generalInfo?.companyName || "Unnamed";
 
-          const row = document.createElement('tr');
-          row.classList.add('border-b');
+            const row = document.createElement("tr");
+            row.classList.add("border-b");
 
-          row.innerHTML = `
+            row.innerHTML = `
             <td class="p-4">${name}</td>
             <td class="p-4 text-center">
               <button
@@ -141,118 +202,149 @@
             </td>
           `;
 
-          const viewButton = row.querySelector('button');
-          viewButton.addEventListener('click', () => {
-            fetchCompanyInfo(name);
-          });
+            const viewButton = row.querySelector("button");
+            viewButton.addEventListener("click", () => {
+              fetchCompanyInfo(name);
+            });
 
-          companyTableBody.appendChild(row);
-        });
-      } catch (error) {
-        console.error('Error loading companies:', error);
-        companyTableBody.innerHTML = `
+            companyTableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error loading companies:", error);
+          companyTableBody.innerHTML = `
           <tr>
             <td colspan="2" class="p-4 text-red-500">Error loading companies</td>
           </tr>
         `;
+        }
       }
-    }
 
-    async function fetchCompanyInfo(companyName) {
-      try {
-        const response = await fetch(`/apicomp/company/get?companyName=${encodeURIComponent(companyName)}`);
-        const data = await response.json();
+      async function fetchCompanyInfo(companyName) {
+        try {
+          const response = await fetch(
+            `/apicomp/company/get?companyName=${encodeURIComponent(
+              companyName
+            )}`
+          );
+          const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error(data.message || 'Failed to fetch company info');
+          if (!response.ok) {
+            throw new Error(data.message || "Failed to fetch company info");
+          }
+
+          renderCompanyInfo(data.company);
+        } catch (error) {
+          console.error(error);
+          companyInfoDiv.innerHTML = `<p class="text-red-500">${error.message}</p>`;
+        }
+      }
+
+      function renderCompanyInfo(company) {
+        companyInfoDiv.innerHTML = "";
+
+        const title = document.createElement("h2");
+        title.classList.add("text-xl", "font-bold", "mb-2");
+        title.textContent = company.generalInfo.companyName;
+        companyInfoDiv.appendChild(title);
+
+        const infoHtml = `
+        <p><strong>Country of Exchange:</strong> ${
+          company.generalInfo.countryOfExchange || "N/A"
+        }</p>
+        <p><strong>Country of Headquarters:</strong> ${
+          company.generalInfo.countryOfHeadquarters || "N/A"
+        }</p>
+        <p><strong>TRBC Industry Group:</strong> ${
+          company.generalInfo.trbcIndustryGroup || "N/A"
+        }</p>
+      `;
+        companyInfoDiv.insertAdjacentHTML("beforeend", infoHtml);
+
+        if (!company.financialData || company.financialData.length === 0) {
+          const noDataMsg = document.createElement("p");
+          noDataMsg.classList.add("mt-4", "text-gray-500");
+          noDataMsg.textContent =
+            "No financial data available for this company.";
+          companyInfoDiv.appendChild(noDataMsg);
+          return;
         }
 
-        renderCompanyInfo(data.company);
-      } catch (error) {
-        console.error(error);
-        companyInfoDiv.innerHTML = `<p class="text-red-500">${error.message}</p>`;
-      }
-    }
+        const financialHeading = document.createElement("h3");
+        financialHeading.classList.add("text-lg", "font-semibold", "mt-4");
+        financialHeading.textContent = "Financial Data:";
+        companyInfoDiv.appendChild(financialHeading);
 
-    function renderCompanyInfo(company) {
-      companyInfoDiv.innerHTML = '';
+        const container = document.createElement("div");
+        container.classList.add("mt-2");
+        companyInfoDiv.appendChild(container);
 
-      const title = document.createElement('h2');
-      title.classList.add('text-xl', 'font-bold', 'mb-2');
-      title.textContent = company.generalInfo.companyName;
-      companyInfoDiv.appendChild(title);
+        const dateLabel = document.createElement("label");
+        dateLabel.setAttribute("for", "dateSelector");
+        dateLabel.classList.add("mr-2");
+        dateLabel.textContent = "Select Date:";
+        container.appendChild(dateLabel);
 
-      const infoHtml = `
-        <p><strong>Country of Exchange:</strong> ${company.generalInfo.countryOfExchange || 'N/A'}</p>
-        <p><strong>Country of Headquarters:</strong> ${company.generalInfo.countryOfHeadquarters || 'N/A'}</p>
-        <p><strong>TRBC Industry Group:</strong> ${company.generalInfo.trbcIndustryGroup || 'N/A'}</p>
-      `;
-      companyInfoDiv.insertAdjacentHTML('beforeend', infoHtml);
+        const dateSelector = document.createElement("select");
+        dateSelector.id = "dateSelector";
+        dateSelector.classList.add("p-2", "border", "rounded");
+        container.appendChild(dateSelector);
 
-      if (!company.financialData || company.financialData.length === 0) {
-        const noDataMsg = document.createElement('p');
-        noDataMsg.classList.add('mt-4', 'text-gray-500');
-        noDataMsg.textContent = 'No financial data available for this company.';
-        companyInfoDiv.appendChild(noDataMsg);
-        return;
-      }
+        const financialDetailsDiv = document.createElement("div");
+        financialDetailsDiv.id = "financialDetails";
+        financialDetailsDiv.classList.add("mt-4");
+        container.appendChild(financialDetailsDiv);
 
-      const financialHeading = document.createElement('h3');
-      financialHeading.classList.add('text-lg', 'font-semibold', 'mt-4');
-      financialHeading.textContent = 'Financial Data:';
-      companyInfoDiv.appendChild(financialHeading);
+        company.financialData.forEach((entry, index) => {
+          const option = document.createElement("option");
+          option.value = index;
+          option.textContent = new Date(entry.date).toLocaleDateString();
+          dateSelector.appendChild(option);
+        });
 
-      const container = document.createElement('div');
-      container.classList.add('mt-2');
-      companyInfoDiv.appendChild(container);
-
-      const dateLabel = document.createElement('label');
-      dateLabel.setAttribute('for', 'dateSelector');
-      dateLabel.classList.add('mr-2');
-      dateLabel.textContent = 'Select Date:';
-      container.appendChild(dateLabel);
-
-      const dateSelector = document.createElement('select');
-      dateSelector.id = 'dateSelector';
-      dateSelector.classList.add('p-2', 'border', 'rounded');
-      container.appendChild(dateSelector);
-
-      const financialDetailsDiv = document.createElement('div');
-      financialDetailsDiv.id = 'financialDetails';
-      financialDetailsDiv.classList.add('mt-4');
-      container.appendChild(financialDetailsDiv);
-
-      company.financialData.forEach((entry, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = new Date(entry.date).toLocaleDateString();
-        dateSelector.appendChild(option);
-      });
-
-      function showFinancialData(entry) {
-        financialDetailsDiv.innerHTML = `
-          <p><strong>Date:</strong> ${new Date(entry.date).toLocaleDateString()}</p>
-          <p><strong>Standardized Currency:</strong> ${entry.standardizedCurrency || 'N/A'}</p>
-          <p><strong>Revenue from Goods & Services:</strong> ${entry.revenueFromGoodsServices ?? 0}</p>
-          <p><strong>Revenue from Business Activities (Total):</strong> ${entry.revenueFromBusinessActivitiesTotal ?? 0}</p>
-          <p><strong>Cost of Operating Revenue:</strong> ${entry.costOfOperatingRevenue ?? 0}</p>
-          <p><strong>Gross Profit (Industrials):</strong> ${entry.grossProfitIndustrials ?? 0}</p>
-          <p><strong>Operating Expenses (Total):</strong> ${entry.operatingExpensesTotal ?? 0}</p>
-          <p><strong>Operating Profit before Non-Recurring Items:</strong> ${entry.operatingProfitBeforeNonRecurring ?? 0}</p>
-          <p><strong>Income before Taxes:</strong> ${entry.incomeBeforeTaxes ?? 0}</p>
-          <p><strong>Net Income after Tax:</strong> ${entry.netIncomeAfterTax ?? 0}</p>
+        function showFinancialData(entry) {
+          financialDetailsDiv.innerHTML = `
+          <p><strong>Date:</strong> ${new Date(
+            entry.date
+          ).toLocaleDateString()}</p>
+          <p><strong>Standardized Currency:</strong> ${
+            entry.standardizedCurrency || "N/A"
+          }</p>
+          <p><strong>Revenue from Goods & Services:</strong> ${
+            entry.revenueFromGoodsServices ?? 0
+          }</p>
+          <p><strong>Revenue from Business Activities (Total):</strong> ${
+            entry.revenueFromBusinessActivitiesTotal ?? 0
+          }</p>
+          <p><strong>Cost of Operating Revenue:</strong> ${
+            entry.costOfOperatingRevenue ?? 0
+          }</p>
+          <p><strong>Gross Profit (Industrials):</strong> ${
+            entry.grossProfitIndustrials ?? 0
+          }</p>
+          <p><strong>Operating Expenses (Total):</strong> ${
+            entry.operatingExpensesTotal ?? 0
+          }</p>
+          <p><strong>Operating Profit before Non-Recurring Items:</strong> ${
+            entry.operatingProfitBeforeNonRecurring ?? 0
+          }</p>
+          <p><strong>Income before Taxes:</strong> ${
+            entry.incomeBeforeTaxes ?? 0
+          }</p>
+          <p><strong>Net Income after Tax:</strong> ${
+            entry.netIncomeAfterTax ?? 0
+          }</p>
           <p><strong>EBITDA:</strong> ${entry.ebitda ?? 0}</p>
         `;
+        }
+
+        dateSelector.addEventListener("change", () => {
+          const selectedIndex = dateSelector.value;
+          const selectedEntry = company.financialData[selectedIndex];
+          showFinancialData(selectedEntry);
+        });
+
+        showFinancialData(company.financialData[0]);
       }
-
-      dateSelector.addEventListener('change', () => {
-        const selectedIndex = dateSelector.value;
-        const selectedEntry = company.financialData[selectedIndex];
-        showFinancialData(selectedEntry);
-      });
-
-      showFinancialData(company.financialData[0]);
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>

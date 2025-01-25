@@ -38,6 +38,7 @@
       id="sidebar"
       class="sidebar bg-white h-full fixed top-0 left-0 shadow-lg z-50 sidebar-expanded"
     >
+      <!-- Sidebar Header -->
       <div
         class="flex items-center justify-between px-4 py-4 border-b bg-gray-100"
       >
@@ -51,6 +52,8 @@
           &#9776;
         </button>
       </div>
+
+      <!-- Sidebar Navigation -->
       <nav class="mt-6">
         <ul class="space-y-2">
           <li>
@@ -113,7 +116,7 @@
               class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
             >
               <span>&#x1F4C8;</span>
-              <span class="sidebar-text">Companies Informations</span>
+              <span class="sidebar-text">Get Company Info</span>
             </a>
           </li>
           <li>
@@ -122,75 +125,73 @@
               class="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded"
             >
               <span>&#x1F5D1;</span>
-              <span class="sidebar-text">Delete Companies</span>
+              <span class="sidebar-text">Delete Company Info</span>
             </a>
           </li>
         </ul>
       </nav>
+      <div class="p-4">
+        <button
+          id="logoutBtn"
+          class="bg-red-500 text-white w-full py-3 rounded-lg hover:bg-red-600 font-bold"
+        >
+          Logout
+        </button>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div id="content" class="content content-expanded">
-      <nav class="bg-white shadow-md p-3 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Dashboard</h1>
-        <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded">
-          Logout
-        </button>
-      </nav>
+      <!-- Dashboard Content -->
       <main class="container mx-auto mt-8 p-4">
+        <!-- Dashboard Header -->
         <div class="bg-gray-100 min-h-screen p-8">
-          <!-- Dashboard Header -->
           <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
-          <!-- Cards Section -->
-          <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"></section>
-
-          <!-- Table Section -->
+          <!-- Companies Overview Section -->
           <section class="bg-white border p-10 shadow-md">
             <h2 class="text-xl font-bold mb-4">Companies Overview</h2>
             <p class="text-sm text-gray-500 mb-4">
               Select a company to view detailed information
             </p>
-            <!-- Search Bar -->
-            <input
-              type="text"
-              placeholder="Search companies..."
-              class="border p-2 mb-4 w-full rounded-lg shadow-sm"
-            />
+
+            <!-- Sector Filter Dropdown -->
+            <div class="mb-4 flex items-center gap-x-4">
+              <label for="sectorFilter" class="font-bold text-gray-700"
+                >Filter by Sector:</label
+              >
+              <select
+                id="sectorFilter"
+                class="border p-2 rounded-lg w-48 shadow-sm"
+              >
+                <option value="">All Sectors</option>
+                <!-- Options populated dynamically by JS -->
+              </select>
+            </div>
+
             <!-- Table -->
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-              <table class="min-w-full table-auto">
-                <thead class="bg-gray-50 text-gray-600 text-left">
-                  <tr>
+            <div class="bg-white shadow rounded mb-6">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="border-b">
                     <th class="py-3 px-6">Company Name</th>
-                    <th class="py-3 px-6">Revenue</th>
-                    <th class="py-3 px-6">Profit</th>
-                    <th class="py-3 px-6">Growth Rate</th>
+
                     <th class="py-3 px-6">Action</th>
                   </tr>
                 </thead>
-                <tbody id="companyTable">
-                  <!-- Rows will be populated dynamically -->
+                <tbody id="companyTableBody">
+                  <!-- Filled by JavaScript -->
                 </tbody>
               </table>
             </div>
           </section>
 
-          <section
-            id="companyDetails"
-            class="mt-8 hidden bg-white shadow-md rounded-lg p-6"
-          >
-            <p id="detailsHeader"></p>
-            <p id="detailsContent" class="text-gray-600">
-              <!-- Details will be dynamically populated -->
-            </p>
-            <button
-              id="closeDetails"
-              class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600"
-            >
-              Close Details
-            </button>
-          </section>
+          <!-- Company Details Section -->
+
+          <div
+            id="companyInfo"
+            class="bg-white p-4 rounded shadow hidden"
+          ></div>
         </div>
       </main>
     </div>
@@ -200,6 +201,7 @@
       const content = document.getElementById("content");
       const toggleSidebar = document.getElementById("toggleSidebar");
 
+      // Sidebar toggle functionality
       toggleSidebar.addEventListener("click", () => {
         if (sidebar.classList.contains("sidebar-expanded")) {
           sidebar.classList.remove("sidebar-expanded");
@@ -219,16 +221,8 @@
             .forEach((el) => el.classList.remove("hidden"));
         }
       });
-
-      // Logout functionality
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        fetch("/logout", {
-          method: "POST",
-          credentials: "include",
-        })
-        
-      });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/dashboard.js"></script>
   </body>
 </html>

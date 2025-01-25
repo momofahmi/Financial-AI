@@ -75,6 +75,14 @@
                 </li>
             </ul>
         </nav>
+        <div class="p-4">
+            <button
+              id="logoutBtn"
+              class="bg-red-500 text-white w-full py-3 rounded-lg hover:bg-red-600 font-bold"
+            >
+              Logout
+            </button>
+          </div>
     </div>
 
     <!-- Main Content -->
@@ -111,6 +119,28 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutBtn = document.getElementById('logoutBtn');
+
+        logoutBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/auth/logout', {
+                        method: 'POST',
+                        credentials: 'include',
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        window.location.href = '/login.html';
+                    } else {
+                        alert('Logout failed. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('An error occurred during logout. Please try again.');
+                }
+            });
+        });
+
         document.getElementById('uploadForm').addEventListener('submit', async function(event) {
             event.preventDefault();
             const formData = new FormData(this);
