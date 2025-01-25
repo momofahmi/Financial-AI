@@ -393,9 +393,9 @@
       const loadingDiv = document.getElementById("loading");
       loadingDiv.innerHTML = '<div class="spinner"></div>';
       loadingDiv.style.display = "block";
-
+      
       // Fetch the model data
-      const response = await fetch("http://localhost:5000/run-model");
+      const response = await fetch(`http://localhost:5000/run-model`);
       const data = await response.json();
 
       // Hide loading spinner
