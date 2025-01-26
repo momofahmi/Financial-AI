@@ -1,4 +1,4 @@
-#*Computer Project Class Website*
+# *Computer Project Class Website*
 ## Overview
 
 Welcome to our Computer Project Class Website! This platform is designed to showcase and manage our project functionalities efficiently. Our project is a financial data management and forecasting platform that collects, processes, and stores company financial data. Using AI models, it analyzes trends and provides forecasts to support data-driven decision-making. Below, you will find instructions on the necessary dependencies and how to set up the project.
