@@ -70,7 +70,7 @@ def main(idx):
     #NO AI TILL HERE
 
     # Convert data to numpy arrays for convenience (reciprocal_avg_fx_rate, inflation, and net_income)
-    data = np.array([reciprocal_avg_fx_rate, inflation, net_income]).T  # Input features
+    data = np.array([reciprocal_avg_fx_rate, inflation]).T  # Input features
     target = np.array(net_income)  # The target variable is net income
 
     scaler = MinMaxScaler()
