@@ -18,3 +18,4 @@ To run this project successfully, ensure you have the following packages and lib
 
 - **TensorFlow** – Essential for AI model execution.
 - **Scikit-learn (sklearn)** – Used for data analysis and machine learning models.
+- other bunch of bullshit libs
